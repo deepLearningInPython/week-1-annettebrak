@@ -1,5 +1,5 @@
 import numpy as np
-from tasks import step, ReLU
+from tasks import step, ReLu
 
 
 def test_relu_default_cutoff():
