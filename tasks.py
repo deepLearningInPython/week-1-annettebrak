@@ -1,4 +1,4 @@
-import numpy
+import numpy as np
 
 # Follow the tasks below to practice basic Python concepts.
 # Write your code in between the dashed lines.
@@ -21,7 +21,6 @@ def step(x):
 
 # -----------------------------------------------
 
-
 # Task 2:
 # Instructions:
 #Write a function that takes in two arguments: a numpy array, and an integer (call argument "cutoff" and set default to 0).
@@ -40,7 +39,6 @@ def ReLu(arr, cutoff = 0):
     return arr_copy
 
 # -----------------------------------------------
-
 
 # Task 3:
 # Instructions:
