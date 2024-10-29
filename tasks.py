@@ -12,9 +12,12 @@ import numpy
 
 # Your code here:
 # -----------------------------------------------
-
-def step
-
+def step(x):
+    # doesn't control for numeric input, it just doesn't work if it's not a nr
+    if x > 0:
+        return 1
+    else:
+        return -1
 
 # -----------------------------------------------
 
@@ -25,11 +28,16 @@ def step
 #The function should return a numpy array of the same length, with all elements smaller than the cutoff being set to cutoff).
 #The name of the function should be ReLu
 
-
 # Your code here:
 # -----------------------------------------------
-def ReLu
-
+def ReLu(arr, cutoff = 0):
+    # arr should be a numpy array
+    # second argument is a nr, 0 is nothing is input
+    arr_copy = np.copy(arr)
+    
+    arr_copy[arr_copy < cutoff] = cutoff
+    
+    return arr_copy
 
 # -----------------------------------------------
 
@@ -43,8 +51,11 @@ def ReLu
 
 # Your code here:
 # -----------------------------------------------
-
-def neural_net_layer
-
+def neural_net_layer(x, z):
+    # x size is (n,p)
+    # z size is p
+    y = x.dot(z)
+    
+    return ReLu(y)
 
 # ------------------------------------------
