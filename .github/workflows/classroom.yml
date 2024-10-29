@@ -1,0 +1,59 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: grade1
+      id: grade1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: grade1
+        setup-command: pip install pytest numpy
+        command: pytest grade_task1.py
+        timeout: 2
+        max-score: 1
+    - name: grade2
+      id: grade2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: grade2
+        setup-command: pip install numpy pytest
+        command: pytest grade_task2.py
+        timeout: 2
+    - name: grade3
+      id: grade3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: grade3
+        setup-command: pip install numpy pytest
+        command: pytest grade_task3.py
+        timeout: 2
+    - name: certificate
+      id: certificate
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: certificate
+        setup-command: ''
+        command: if [ -f "certificate.pdf" ]; then echo "File exists"; else echo "File
+          does not exist"; exit 1; fi
+        timeout: 2
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        GRADE1_RESULTS: "${{steps.grade1.outputs.result}}"
+        GRADE2_RESULTS: "${{steps.grade2.outputs.result}}"
+        GRADE3_RESULTS: "${{steps.grade3.outputs.result}}"
+        CERTIFICATE_RESULTS: "${{steps.certificate.outputs.result}}"
+      with:
+        runners: grade1,grade2,grade3,certificate
