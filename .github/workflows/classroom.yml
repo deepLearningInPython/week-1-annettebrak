@@ -30,6 +30,7 @@ jobs:
         setup-command: pip install numpy pytest
         command: pytest grade_task2.py
         timeout: 2
+        max-score: 1
     - name: grade3
       id: grade3
       uses: classroom-resources/autograding-command-grader@v1
@@ -38,6 +39,7 @@ jobs:
         setup-command: pip install numpy pytest
         command: pytest grade_task3.py
         timeout: 2
+        max-score: 1
     - name: certificate
       id: certificate
       uses: classroom-resources/autograding-command-grader@v1
